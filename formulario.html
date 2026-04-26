@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Enviar Música - TCR Salsa Network</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #0b0b0b;
+  color: #fff;
+  text-align: center;
+}
+
+header {
+  padding: 50px;
+  background: linear-gradient(135deg, #000, #8b0000);
+}
+
+h1 {
+  color: gold;
+}
+
+.container {
+  padding: 30px;
+}
+
+form {
+  max-width: 500px;
+  margin: auto;
+  background: #181818;
+  padding: 25px;
+  border-radius: 10px;
+}
+
+input, select, textarea {
+  width: 100%;
+  padding: 12px;
+  margin: 10px 0;
+  border-radius: 6px;
+  border: none;
+}
+
+button {
+  background: gold;
+  color: black;
+  padding: 15px;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <h1>Envía tu música</h1>
+  <p>TCR Salsa Network</p>
+</header>
+
+<div class="container">
+
+<form id="formulario">
+
+<input type="text" name="nombre" placeholder="Nombre del artista" required>
+
+<input type="text" name="cancion" placeholder="Nombre de la canción" required>
+
+<input type="url" name="youtube" placeholder="Link de YouTube" required>
+
+<input type="text" name="instagram" placeholder="Instagram">
+
+<input type="email" name="email" placeholder="Correo electrónico" required>
+
+<select name="plan" required>
+  <option value="">Selecciona un plan</option>
+  <option value="basico">$10 - Plan Básico</option>
+  <option value="premium">$20 - Plan Premium</option>
+</select>
+
+<textarea name="mensaje" placeholder="Mensaje adicional"></textarea>
+
+<button type="submit">Enviar</button>
+
+</form>
+
+</div>
+
+<script>
+document.getElementById("formulario").addEventListener("submit", function(e){
+  e.preventDefault();
+
+  alert("Formulario enviado. Pronto serás contactado.");
+
+  this.reset();
+});
+</script>
+
+</body>
+</html>
