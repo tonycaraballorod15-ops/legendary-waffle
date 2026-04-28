@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Registro de Artistas | TCR Salsa Network</title>
+  <style>
+    :root {
+      --bg: #070707;
+      --card: #121212;
+      --gold: #d4af37;
+      --gold-soft: #f0d77b;
+      --text: #f4f4f4;
+      --muted: #bdbdbd;
+      --pr-red: #ed0000;
+      --pr-blue: #0050f0;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: radial-gradient(circle at top right, #171717 0%, var(--bg) 40%);
+      color: var(--text);
+      line-height: 1.45;
+    }
+
+    .banner {
+      text-align: center;
+      padding: 2rem 1rem 1.5rem;
+      border-bottom: 3px solid var(--gold);
+      background: linear-gradient(110deg, #020202, #0f0f0f);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .banner::before,
+    .banner::after {
+      content: "";
+      position: absolute;
+      width: 160px;
+      height: 160px;
+      border-radius: 50%;
+      opacity: 0.15;
+      filter: blur(2px);
+    }
+
+    .banner::before {
+      background: var(--pr-red);
+      top: -80px;
+      left: -30px;
+    }
+
+    .banner::after {
+      background: var(--pr-blue);
+      right: -30px;
+      bottom: -80px;
+    }
+
+    h1 {
+      margin: 0;
+      color: var(--gold);
+      font-size: clamp(1.5rem, 4vw, 2rem);
+    }
+
+    .subtitle {
+      margin: 0.5rem auto 0;
+      color: var(--muted);
+      max-width: 560px;
+      font-size: 0.95rem;
+      padding: 0 0.5rem;
+    }
+
+    main {
+      width: min(100%, 680px);
+      margin: 1.5rem auto;
+      padding: 0 1rem 2rem;
+    }
+
+    .card {
+      background: var(--card);
+      border: 1px solid #252525;
+      border-radius: 14px;
+      padding: 1rem;
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
+    }
+
+    label {
+      display: block;
+      margin-top: 0.9rem;
+      margin-bottom: 0.35rem;
+      font-weight: 700;
+      color: var(--gold-soft);
+      font-size: 0.92rem;
+    }
+
+    input,
+    select,
+    textarea,
+    button {
+      width: 100%;
+      font: inherit;
+      border-radius: 10px;
+    }
+
+    input,
+    select,
+    textarea {
+      border: 1px solid #333;
+      background: #0f0f0f;
+      color: var(--text);
+      padding: 0.75rem;
+      transition: border-color 0.15s ease, box-shadow 0.15s ease;
+    }
+
+    input:focus,
+    select:focus,
+    textarea:focus {
+      outline: none;
+      border-color: var(--gold);
+      box-shadow: 0 0 0 2px rgba(212, 175, 55, 0.2);
+    }
+
+    textarea {
+      min-height: 120px;
+      resize: vertical;
+    }
+
+    .help {
+      margin-top: 0.5rem;
+      color: var(--muted);
+      font-size: 0.85rem;
+    }
+
+    .error {
+      display: none;
+      margin-top: 0.6rem;
+      color: #ff9b9b;
+      font-size: 0.9rem;
+    }
+
+    .ok {
+      display: none;
+      margin-top: 0.6rem;
+      color: #8ad08a;
+      font-size: 0.9rem;
+    }
+
+    button {
+      margin-top: 1rem;
+      border: none;
+      background: linear-gradient(120deg, var(--gold), #f1cc53);
+      color: #111;
+      padding: 0.9rem 1rem;
+      font-weight: 800;
+      cursor: pointer;
+    }
+
+    button:hover {
+      filter: brightness(1.04);
+    }
+
+    @media (min-width: 640px) {
+      .card {
+        padding: 1.25rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="banner">
+    <h1>Registro de Artistas</h1>
+    <p class="subtitle">Comparte tu propuesta con TCR Salsa Network y lleva tu música al próximo nivel.</p>
+  </header>
+
+  <main>
+    <section class="card">
+      <form id="artistas-form" method="POST" action="http://localhost:5678/webhook-test/tcr-artista" novalidate>
+        <label for="nombre_artistico">Nombre artístico *</label>
+        <input id="nombre_artistico" name="nombre_artistico" type="text" required maxlength="100" placeholder="Ej. Son de la Calle">
+
+        <label for="email">Email *</label>
+        <input id="email" name="email" type="email" required placeholder="tuemail@ejemplo.com">
+
+        <label for="telefono">Teléfono (opcional)</label>
+        <input id="telefono" name="telefono" type="tel" inputmode="tel" placeholder="+1 787 000 0000">
+
+        <label for="youtube">Link de YouTube *</label>
+        <input id="youtube" name="youtube" type="url" required placeholder="https://www.youtube.com/watch?v=...">
+
+        <label for="instagram">Link de Instagram *</label>
+        <input id="instagram" name="instagram" type="url" required placeholder="https://www.instagram.com/tu_cuenta">
+
+        <label for="genero">Género *</label>
+        <select id="genero" name="genero" required>
+          <option value="">Selecciona un género</option>
+          <option value="salsa_dura">Salsa dura</option>
+          <option value="salsa_romantica">Salsa romántica</option>
+          <option value="timba">Timba</option>
+          <option value="fusion">Fusión tropical</option>
+          <option value="otro">Otro</option>
+        </select>
+
+        <label for="mensaje">Mensaje *</label>
+        <textarea id="mensaje" name="mensaje" required maxlength="1000" placeholder="Cuéntanos sobre tu proyecto musical..."></textarea>
+
+        <button type="submit">Enviar mi música</button>
+
+        <p class="help">Campos con * son obligatorios.</p>
+        <p id="error" class="error" role="alert"></p>
+        <p id="ok" class="ok" role="status"></p>
+      </form>
+    </section>
+  </main>
+
+  <script>
+    (function () {
+      const form = document.getElementById('artistas-form');
+      const errorBox = document.getElementById('error');
+      const okBox = document.getElementById('ok');
+
+      function showError(message) {
+        okBox.style.display = 'none';
+        errorBox.textContent = message;
+        errorBox.style.display = 'block';
+      }
+
+      function clearMessages() {
+        errorBox.style.display = 'none';
+        okBox.style.display = 'none';
+      }
+
+      function isValidHttpUrl(value) {
+        try {
+          const url = new URL(value);
+          return url.protocol === 'http:' || url.protocol === 'https:';
+        } catch (_) {
+          return false;
+        }
+      }
+
+      form.addEventListener('submit', function (event) {
+        clearMessages();
+
+        const nombre = form.nombre_artistico.value.trim();
+        const email = form.email.value.trim();
+        const youtube = form.youtube.value.trim();
+        const instagram = form.instagram.value.trim();
+        const genero = form.genero.value.trim();
+        const mensaje = form.mensaje.value.trim();
+
+        if (!nombre || !email || !youtube || !instagram || !genero || !mensaje) {
+          event.preventDefault();
+          showError('Por favor completa todos los campos obligatorios.');
+          return;
+        }
+
+        const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailPattern.test(email)) {
+          event.preventDefault();
+          showError('Ingresa un correo electrónico válido.');
+          return;
+        }
+
+        if (!isValidHttpUrl(youtube) || !youtube.includes('youtube.com') && !youtube.includes('youtu.be')) {
+          event.preventDefault();
+          showError('Ingresa un link de YouTube válido.');
+          return;
+        }
+
+        if (!isValidHttpUrl(instagram) || !instagram.includes('instagram.com')) {
+          event.preventDefault();
+          showError('Ingresa un link de Instagram válido.');
+          return;
+        }
+
+        okBox.textContent = 'Enviando tu música...';
+        okBox.style.display = 'block';
+      });
+    })();
+  </script>
+</body>
+</html>
